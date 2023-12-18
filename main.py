@@ -1,3 +1,4 @@
+import time
 from typing import List
 
 
@@ -17,7 +18,6 @@ def read_input(number, file) -> List[Paper]:
         else:
             raise Exception('Error on @pchelka_zh duty. test is incorrect')
 
-    coins.sort(key=lambda x: x.coord)
     return coins
 
 
@@ -37,13 +37,16 @@ def evaluate_test_case(file, test_number: int):
     print(f"Testing Case #{test_number}...")
     expected_result = file.readline().strip()
 
+    start_time = time.time
     actual_result = find_time(coins)
+    completion_time = time.time - start_time
     if actual_result != expected_result:
         print(f"Error in Case #{test_number}: Expected - {expected_result}, Actual - {actual_result}")
     else:
         print(f"Case #{test_number} Passed!")
 
     assert actual_result == expected_result
+    assert completion_time <= 1
 
     return True
 
